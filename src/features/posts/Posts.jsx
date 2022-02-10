@@ -17,7 +17,7 @@ export default function Posts() {
   }, [dispatch, status]);
 
   return (
-    <div>
+    <div className="mt-48">
       <div>
         {status === "loading" && <h2>loading...</h2>}
         {status === "error" && <h2>something went wrong... {error}</h2>}
