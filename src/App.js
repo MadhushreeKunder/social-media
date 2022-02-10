@@ -6,7 +6,7 @@ import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div>
+    <div className="w-11/12 max-w-screen-lg my-0 mx-auto text-secondaryDark">
       <Header />
       <div>
         <Routes>
