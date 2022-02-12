@@ -1,14 +1,15 @@
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
-// import { fetchPosts } from "../../services/fetchPosts";
 import axios from "axios";
 import {
   deletePostButtonClicked,
   likeButtonClicked,
 } from "../profile/profileSlice";
 import { Backend_URL } from "../utils";
+import { logoutUser } from "../auth/authenticationSlice";
+import { followButtonClicked } from "../followersUsers/followersUsersSlice";
+import { useSelector } from "react-redux";
 
 export const loadPosts = createAsyncThunk("posts/loadPosts", async () => {
-  // const response = await fetchPosts();
   const {
     data: { response },
   } = await axios.get(`${Backend_URL}/posts`);
@@ -26,6 +27,16 @@ export const createPostButtonClicked = createAsyncThunk(
   }
 );
 
+export const userLikesClicked = createAsyncThunk(
+  "posts/userLikesClicked",
+  async ({ postId }) => {
+    const {
+      data: { response },
+    } = await axios.get(`${Backend_URL}/posts/${postId}/likedby`);
+    return response;
+  }
+);
+
 export const postSlice = createSlice({
   name: "posts",
   initialState: {
@@ -36,15 +47,13 @@ export const postSlice = createSlice({
     showLikesContainer: false,
   },
   reducers: {
-    // likeButtonPressed: (state, action) => {
-    //   const postIndex = state.posts.findIndex(
-    //     (post) => post.postID === action.payload
-    //   );
-    //   state.posts[postIndex].likes += 1;
-    // },
-    // sendPost: ({ posts }, action) => {
-    //   posts.push(action.payload.post);
-    // },
+    closeButtonInLikesContainerClicked: (state, action) => {
+      state.showLikesContainer = false;
+      state.usersWhoLikedPost = [];
+    },
+    storeSharedPost: (state, action) => {
+      state.sharedPost = action.payload;
+    },
   },
 
   extraReducers: {
@@ -100,9 +109,48 @@ export const postSlice = createSlice({
     [deletePostButtonClicked.rejected]: (state, action) => {
       console.log(action.error.message);
     },
+
+    [logoutUser]: (state, action) => {
+      state.posts = [];
+      state.status = "idle";
+      state.usersWhoLikedPost = [];
+      state.showLikesContainer = false;
+    },
+
+    [userLikesClicked.fulfilled]: (state, action) => {
+      state.showLikesContainer = true;
+      state.usersWhoLikedPost = action.payload;
+    },
+
+    [userLikesClicked.rejected]: (state, action) => {
+      console.log(action.error.message);
+    },
+
+    [followButtonClicked.fulfilled]: (state, action) => {
+      if (action.payload.isAdded) {
+        state.posts.push(...action.payload.posts);
+        state.posts.sort((post1, post2) => post2.createdAt - post1.createdAt);
+      } else {
+        state.posts = state.posts.filter(
+          ({ _id }) => !action.payload.posts.find((post) => post._id === _id)
+        );
+      }
+    },
+
+    [deletePostButtonClicked.fulfilled]: (state, action) => {
+      const index = state.posts.findIndex(
+        (post) => post._id === action.payload
+      );
+      if (index !== -1) {
+        state.posts.splice(index, 1);
+      }
+    },
   },
 });
 
-export const { likeButtonPressed } = postSlice.actions;
+export const { closeButtonInLikesContainerClicked, storeSharedPost } =
+  postSlice.actions;
 
 export default postSlice.reducer;
+
+export const usePostSelector = () => useSelector((state) => state.posts);
