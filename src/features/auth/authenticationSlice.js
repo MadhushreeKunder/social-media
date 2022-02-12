@@ -2,9 +2,9 @@ import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Backend_URL } from "../utils";
+import { setupAuthHeaderForServiceCalls } from "./utils";
+import { setLocalStorage } from "./utils";
 import { getLocalStorage } from "./utils";
-
-
 
 export const signupButtonClicked = createAsyncThunk(
   "authenticate/signupButtonClicked",
@@ -82,6 +82,19 @@ export const authenticationSlice = createSlice({
       state.signUp.signUpStatus = "error";
       state.signUp.signUpError = action.payload;
     },
+
+    [loginButtonClicked.fulfilled]: (state, action) => {
+      Object.assign(state.authentication, { ...action.payload.userDetails });
+      setLocalStorage(action.payload.userDetails);
+      setupAuthHeaderForServiceCalls(action.payload.userDetails.token);
+    },
+
+    [loginButtonClicked.rejected]: (state, action) => {
+      console.log(action.error.message);
+    },
+
+    
+
   },
 });
 
