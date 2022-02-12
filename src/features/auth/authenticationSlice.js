@@ -2,28 +2,9 @@ import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Backend_URL } from "../utils";
+import { getLocalStorage } from "./utils";
 
-const setLocalStorage = (sessionDeatils) => {
-  localStorage?.setItem("session", JSON.stringify(sessionDeatils));
-};
 
-const getLocalStorage = () => {
-  const defaultValues = {
-    token: "",
-    name: "",
-    userName: "",
-    userId: "",
-    avatar: "",
-  };
-
-  return JSON.parse(localStorage.getItem("session")) || defaultValues;
-};
-
-const updateSessionDetailsInLocalStorage = (avatar) => {
-  const userDetails = JSON.parse(localStorage?.getItem("session"));
-  userDetails.avatar = avatar;
-  localStorage?.setItem("session", JSON.stringify(userDetails));
-};
 
 export const signupButtonClicked = createAsyncThunk(
   "authenticate/signupButtonClicked",
