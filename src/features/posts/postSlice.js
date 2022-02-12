@@ -62,10 +62,11 @@ export const postSlice = createSlice({
     [createPostButtonClicked.fulfilled]: (state, action) => {
       state.posts.unshift(action.payload);
     },
-    
+
     [createPostButtonClicked.rejected]: (state, action) => {
       console.log(action.error.message);
     },
+    []
   },
 });
 
