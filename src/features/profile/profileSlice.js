@@ -4,9 +4,9 @@ import { Backend_URL } from "../utils";
 import {
   followButtonClicked,
   followButtonClickedInFollowersList,
-  followButtonClickedInFollowingList,
   removeFromFollowersButtonClicked,
 } from "../followersUsers/followersUsersSlice";
+import { followButtonClickedInFollowingList } from "../followingUsers/followingUsersSlice";
 import { useSelector } from "react-redux";
 
 export const likeButtonClicked = createAsyncThunk(
@@ -174,7 +174,6 @@ const profileSlice = createSlice({
     },
   },
 });
-
 
 export default profileSlice.reducer;
 
