@@ -11,3 +11,13 @@ export const likeButtonClicked = createAsyncThunk(
     return { postId, isLiked, updateProfile };
   }
 );
+
+export const deletePostButtonClicked = createAsyncThunk(
+  "posts/deletePostButtonClicked",
+  async ({ postId }) => {
+    const {
+      data: { response },
+    } = await axios.delete(`${Backend_URL}/posts/${postId}`);
+    return response;
+  }
+);

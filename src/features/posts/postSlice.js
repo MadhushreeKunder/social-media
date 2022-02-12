@@ -1,7 +1,10 @@
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 // import { fetchPosts } from "../../services/fetchPosts";
 import axios from "axios";
-import { likeButtonClicked } from "../profile/profileSlice";
+import {
+  deletePostButtonClicked,
+  likeButtonClicked,
+} from "../profile/profileSlice";
 import { Backend_URL } from "../utils";
 
 export const loadPosts = createAsyncThunk("posts/loadPosts", async () => {
@@ -80,8 +83,21 @@ export const postSlice = createSlice({
           : state.posts[index].totalLikes--;
       }
     },
-    
+
     [likeButtonClicked.rejected]: (state, action) => {
+      console.log(action.error.message);
+    },
+
+    [deletePostButtonClicked.fulfilled]: (state, action) => {
+      const index = state.posts.findIndex(
+        (post) => post._id === action.payload.postId
+      );
+      if (index !== -1) {
+        state.posts.splice(index, 1);
+      }
+    },
+
+    [deletePostButtonClicked.rejected]: (state, action) => {
       console.log(action.error.message);
     },
   },
