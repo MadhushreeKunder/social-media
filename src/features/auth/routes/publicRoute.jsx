@@ -3,7 +3,7 @@ import { useAuthentication } from "../authenticationSlice";
 
 export const PublicRoute = ({ path, ...props }) => {
   const {
-    authenticate: { token },
+    authentication: { token },
   } = useAuthentication();
   return token ? <Navigate replace to="/" /> : <Route path={path} {...props} />;
 };

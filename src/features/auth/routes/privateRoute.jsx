@@ -3,7 +3,7 @@ import { useAuthentication } from "../authenticationSlice";
 
 export const PrivateRoute = ({ path, ...props }) => {
   const {
-    authenticate: { token },
+    authentication: { token },
   } = useAuthentication();
 
   return token ? (
