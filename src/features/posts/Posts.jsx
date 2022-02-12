@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { likeButtonPressed, loadPosts } from "./postSlice";
-import { MdFavorite } from "react-icons/md";
+import { MdFavorite, MdImage } from "react-icons/md";
 
 export default function Posts() {
   const { posts, status, error } = useSelector((state) => {
@@ -23,21 +23,51 @@ export default function Posts() {
         <div className="basis-2/3 ">
           {status === "loading" && <h2>loading...</h2>}
           {status === "error" && <h2>something went wrong... {error}</h2>}
+
+          <section className="border shadow-lg rounded-2xl my-6">
+            <div className="flex p-4 gap-3">
+              <div>
+                <img src="Images/logo2.png"></img>
+              </div>
+              <div className="flex flex-col grow ">
+                <input
+                  type="text"
+                  placeholder="add caption"
+                  className="border-2 mb-2 p-2 w-full rounded-md caret-primaryCoral focus:outline-none focus:border-rose-300 focus:ring-1"
+                />
+                <textarea
+                  type="text"
+                  placeholder="What's happening"
+                  className="border-2 mb-2 p-2 w-full rounded-md caret-primaryCoral  focus:outline-none focus:border-rose-300 focus:ring-1 resize-y"
+                />
+
+                <div className="flex flex-row items-center">
+                  <MdImage className="text-2xl text-mediumGray focus:border-rose-300 focus:ring-1 mr-4" />
+                  <button className="text-lg border-2 border-primaryCoral text-primaryCoral rounded-md py-1 px-3 hover:text-white hover:bg-primaryCoral">
+                    Post
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {posts.map((post) => (
             <article
               key={post.postID}
               className="border-1 shadow-lg rounded-2xl my-6"
             >
-              <div className="caption"> {post.caption} </div>
-              <div className="likes">
-                {post.likes}{" "}
-                <button
-                  onClick={() => dispatch(likeButtonPressed(post.postID))}
-                >
-                  <span role="img" aria-label="like">
-                    ❤️
-                  </span>
-                </button>
+              <div className="flex flex-col">
+                <div className="caption"> {post.caption} </div>
+                <div className="likes">
+                  {post.likes}{" "}
+                  <button
+                    onClick={() => dispatch(likeButtonPressed(post.postID))}
+                  >
+                    <span role="img" aria-label="like">
+                      ❤️
+                    </span>
+                  </button>
+                </div>
               </div>
             </article>
           ))}
