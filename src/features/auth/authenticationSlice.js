@@ -1,0 +1,90 @@
+import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { Backend_URL } from "../utils";
+
+const setLocalStorage = (sessionDeatils) => {
+  localStorage?.setItem("session", JSON.stringify(sessionDeatils));
+};
+
+const getLocalStorage = () => {
+  const defaultValues = {
+    token: "",
+    name: "",
+    userName: "",
+    userId: "",
+    avatar: "",
+  };
+
+  return JSON.parse(localStorage.getItem("session")) || defaultValues;
+};
+
+const updateSessionDetailsInLocalStorage = (avatar) => {
+  const userDetails = JSON.parse(localStorage?.getItem("session"));
+  userDetails.avatar = avatar;
+  localStorage?.setItem("session", JSON.stringify(userDetails));
+};
+
+export const signupButtonClicked = createAsyncThunk(
+  "authenticate/signupButtonClicked",
+  async (userDetails, { rejectWithValue }) => {
+    try {
+      const {
+        data: { response },
+      } = await axios.post(`${Backend_URL}/social-profiles/signup`, {
+        ...userDetails,
+      });
+
+      return response;
+    } catch (error) {
+      const message = error.response.data.message;
+      return rejectWithValue(message);
+    }
+  }
+);
+
+export const logoutUser = createAction("authentication/logoutUser");
+
+export const authenticationSlice = createSlice({
+  name: "authentication",
+  initialState: {
+    authentication: getLocalStorage(),
+    signUp: {
+      signUpStatus: "idle",
+      signUpError: "",
+    },
+    notifications: [],
+  },
+  reducers: {},
+  extraReducers: {
+    [logoutUser]: (state) => {
+      Object.assign(state.authentication, {
+        token: "",
+        name: "",
+        userName: "",
+        avatar: "",
+        userId: "",
+      });
+      state.notifications = [];
+      localStorage?.removeItem("session");
+    },
+
+    [signupButtonClicked.pending]: (state, action) => {
+      state.signUp.signUpStatus = "loading";
+    },
+
+    [signupButtonClicked.fulfilled]: (state, action) => {
+      state.signUp.signUpStatus = "success";
+    },
+
+    [signupButtonClicked.rejected]: (state, action) => {
+      state.signUp.signUpStatus = "error";
+      state.signUp.signUpError = action.payload;
+    },
+  },
+});
+
+export default authenticationSlice.reducer;
+export const useAuthentication = () => {
+  useSelector((state) => state.authentication);
+};
