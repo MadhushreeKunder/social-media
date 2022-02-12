@@ -4,6 +4,7 @@ import { deletePostButtonClicked, likeButtonClicked } from "./profileSlice";
 import { userLikesClicked } from "../posts/postSlice";
 import { Link } from "react-router-dom";
 import { MdFavorite } from "react-icons/md";
+import Linkify from "react-linkify/dist/components/Linkify";
 
 export const PostCard = ({ post }) => {
   const dispatch = useDispatch();
@@ -51,7 +52,9 @@ export const PostCard = ({ post }) => {
             )}
           </div>
           <div className="border-y-2">
-            <p className="m-4 text-2xl">{post?.content}</p>
+            <p className="m-4 text-2xl">
+              <Linkify>{post?.content}</Linkify>
+            </p>
             {post?.media && <img src={post?.media} alt={post?.content} />}
           </div>
           <div className="p-4">
