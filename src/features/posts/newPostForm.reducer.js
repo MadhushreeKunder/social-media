@@ -1,4 +1,4 @@
-export const initialstateOfPostForm = {
+export const initialStateOfPostForm = {
   caption: "",
   content: "",
   contentError: "",
@@ -35,7 +35,7 @@ export const newPostFormReducer = (state, { type, payload }) => {
       return { ...state, contentError: "" };
     }
     case CLEAR_FORM: {
-      return initialstateOfPostForm;
+      return initialStateOfPostForm;
     }
     default:
       throw new Error("Invalid Action");
