@@ -7,7 +7,7 @@ import { MdImage } from "react-icons/md";
 
 import {
   ACTIONS,
-  initialstateOfPostForm,
+  initialStateOfPostForm,
   newPostFormReducer,
 } from "./newPostForm.reducer";
 import {
@@ -25,7 +25,7 @@ export const ComposePostForm = () => {
 
   const [formState, formDispatch] = useReducer(
     newPostFormReducer,
-    initialstateOfPostForm
+    initialStateOfPostForm
   );
 
   const {
