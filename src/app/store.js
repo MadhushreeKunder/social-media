@@ -1,18 +1,21 @@
-// import { configureStore } from '@reduxjs/toolkit';
-// import counterReducer from '../features/counter/counterSlice';
 
-// export const store = configureStore({
-//   reducer: {
-//     counter: counterReducer,
-//   },
-// });
 
 import { configureStore } from "@reduxjs/toolkit";
-import postsReducer from "../features/posts/postSlice";
+import authenticationReducer from "../features/auth/authenticationSlice";
+import postReducer from '../features/posts/postSlice';
+import usersReducer from '../features/users/usersSlice';
+import profileReducer from '../features/profile/profileSlice';
+import followersReducer from '../features/followersUsers/followersUsersSlice';
+import followingReducer from '../features/followingUsers/followingUsersSlice';
 
-export default configureStore({
+export const store = configureStore({
   reducer: {
-    posts: postsReducer,
+    authentication: authenticationReducer,
+		posts: postReducer,
+		users: usersReducer,
+		profile: profileReducer,
+		followers: followersReducer,
+		following: followingReducer,
     
   }
 });
