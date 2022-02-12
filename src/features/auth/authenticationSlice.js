@@ -1,23 +1,28 @@
-import { createAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { useSelector } from "react-redux";
-import { Backend_URL } from "../utils";
-import { setupAuthHeaderForServiceCalls } from "./utils";
-import { setLocalStorage } from "./utils";
-import { getLocalStorage } from "./utils";
+import { createAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { Backend_URL } from '../utils';
+import { setupAuthHeaderForServiceCalls } from './utils';
+import { setLocalStorage } from './utils';
+import { getLocalStorage } from './utils';
 
 export const signupButtonClicked = createAsyncThunk(
-  "authenticate/signupButtonClicked",
+  'authenticate/signupButtonClicked',
   async (userDetails, { rejectWithValue }) => {
     try {
       const {
         data: { response },
-      } = await axios.post(`${Backend_URL}/social-profiles/signup`, {
-        ...userDetails,
+      } = await axios({
+        method: 'POST',
+        url: `${Backend_URL}/social-profiles/signup`,
+        data: { ...userDetails },
       });
+
+      console.log('here1', response);
 
       return response;
     } catch (error) {
+      console.log('here', error.response.data.message);
       const message = error.response.data.message;
       return rejectWithValue(message);
     }
@@ -25,13 +30,13 @@ export const signupButtonClicked = createAsyncThunk(
 );
 
 export const loginButtonClicked = createAsyncThunk(
-  "authenticate/loginButtonClicked",
+  'authenticate/loginButtonClicked',
   async ({ email, password }, { rejectWithValue }) => {
     try {
       const {
         data: { response },
       } = await axios({
-        method: "POST",
+        method: 'POST',
         url: `${Backend_URL}/social-profiles/login`,
         headers: { email, password },
       });
@@ -44,15 +49,28 @@ export const loginButtonClicked = createAsyncThunk(
   }
 );
 
-export const logoutUser = createAction("authentication/logoutUser");
+export const loadNotifications = createAsyncThunk(
+  'authenticate/loadNotifications',
+  async () => {
+    const {
+      data: { response },
+    } = await axios({
+      method: 'GET',
+      url: `${Backend_URL}/social-profiles/notifications`,
+    });
+    return response;
+  }
+);
+
+export const logoutUser = createAction('authentication/logoutUser');
 
 export const authenticationSlice = createSlice({
-  name: "authentication",
+  name: 'authentication',
   initialState: {
     authentication: getLocalStorage(),
     signUp: {
-      signUpStatus: "idle",
-      signUpError: "",
+      signUpStatus: 'idle',
+      signUpError: '',
     },
     notifications: [],
   },
@@ -60,26 +78,26 @@ export const authenticationSlice = createSlice({
   extraReducers: {
     [logoutUser]: (state) => {
       Object.assign(state.authentication, {
-        token: "",
-        name: "",
-        userName: "",
-        avatar: "",
-        userId: "",
+        token: '',
+        name: '',
+        userName: '',
+        avatar: '',
+        userId: '',
       });
       state.notifications = [];
-      localStorage?.removeItem("session");
+      localStorage?.removeItem('session');
     },
 
     [signupButtonClicked.pending]: (state, action) => {
-      state.signUp.signUpStatus = "loading";
+      state.signUp.signUpStatus = 'loading';
     },
 
     [signupButtonClicked.fulfilled]: (state, action) => {
-      state.signUp.signUpStatus = "success";
+      state.signUp.signUpStatus = 'success';
     },
 
     [signupButtonClicked.rejected]: (state, action) => {
-      state.signUp.signUpStatus = "error";
+      state.signUp.signUpStatus = 'error';
       state.signUp.signUpError = action.payload;
     },
 
@@ -92,9 +110,12 @@ export const authenticationSlice = createSlice({
     [loginButtonClicked.rejected]: (state, action) => {
       console.log(action.error.message);
     },
-
-    
-
+    [loadNotifications.fulfilled]: (state, action) => {
+      state.notifications = action.payload;
+    },
+    [loadNotifications.rejected]: (state, action) => {
+      console.log(action.error.message);
+    },
   },
 });
 
