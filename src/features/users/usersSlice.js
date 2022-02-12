@@ -6,7 +6,7 @@ import { Backend_URL } from "../utils";
 
 
 export const loadUsers = createAsyncThunk('users/loadUsers', async () => {
-    const { data: {response}} = await axios.get(`${Backend_URL}/social-profile`);
+    const { data: {response}} = await axios.get(`${Backend_URL}/social-profiles`);
     return response;
 });
 
