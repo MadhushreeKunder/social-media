@@ -43,6 +43,26 @@ export const signupButtonClicked = createAsyncThunk(
   }
 );
 
+export const loginButtonClicked = createAsyncThunk(
+  "authenticate/loginButtonClicked",
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      const {
+        data: { response },
+      } = await axios({
+        method: "POST",
+        url: `${Backend_URL}/social-profiles/login`,
+        headers: { email, password },
+      });
+      return { userDetails: response };
+    } catch (error) {
+      console.log(error);
+      const message = error.response.data.message;
+      return rejectWithValue(message);
+    }
+  }
+);
+
 export const logoutUser = createAction("authentication/logoutUser");
 
 export const authenticationSlice = createSlice({
