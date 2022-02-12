@@ -173,7 +173,7 @@ export const SignUp = () => {
 
           <div
             className="flex flex-col w-60 m-4 justify-start"
-            isInvalid={!!formState.Error}
+            isInvalid={!!formState.passwordError}
           >
             <label className="mb-2 font-medium text-slate-900 self-start">
               <MdLock className="inline" /> Password
