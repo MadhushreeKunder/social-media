@@ -59,8 +59,9 @@ export const FollowersContainer = ({ userName }) => {
 
   return (
     <>
+      <div>followers</div>
+
       <div>
-        followers
         {followersDetails.length === 0 ? (
           <p>No followers yet</p>
         ) : (
