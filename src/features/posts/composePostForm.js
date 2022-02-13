@@ -15,6 +15,7 @@ import {
   storeSharedPost,
   usePostSelector,
 } from "./postSlice";
+import { UploadImage } from "./uploadImage";
 
 export const ComposePostForm = () => {
   const [deleteToken, setToken] = useState("");
@@ -154,7 +155,7 @@ export const ComposePostForm = () => {
             onFocus={() => {
               formDispatch({ type: SET_CONTENT_ERROR, payload: "" });
             }}
-            isInvalid={!!formState.contentError}
+            // isInvalid={!!formState.contentError}
           />
 
           {media && (
@@ -165,11 +166,8 @@ export const ComposePostForm = () => {
           )}
 
           <div className="flex flex-row items-center">
-            <MdImage
-              className="text-2xl text-mediumGray focus:border-rose-300 focus:ring-1 mr-4"
-              setToken={setToken}
-              setMedia={setMedia}
-            />
+            <UploadImage setToken={setToken} setMedia={setMedia} />
+
             <button
               className="text-lg border-2 border-primaryCoral text-primaryCoral rounded-md py-1 px-3 hover:text-white hover:bg-primaryCoral"
               onClick={postButtonClicked}
