@@ -9,7 +9,8 @@ export const PrivateRoute = ({ children, path, ...props }) => {
   return token ? (
     <Route path={path} {...props} />
   ) : (
-    <Navigate to="/login" replace />
+    <Navigate replace state={{ from: path }} to="/login" replace />
   );
   // return token ? children : <Navigate replace to="/login" />;
 };
+
