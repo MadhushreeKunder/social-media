@@ -1,6 +1,6 @@
 import { useDropzone } from "react-dropzone";
 import { CLOUDINARY_PRESET, CLOUDINARY_URL } from "../utils";
-import { MdImage } from "react-icons/md";
+import { MdCameraAlt } from "react-icons/md";
 import { Modal } from "./Modal";
 import { useState } from "react";
 
@@ -33,7 +33,7 @@ export const UploadImage = ({ setToken, setMedia, text }) => {
 
   return (
     <>
-      <MdImage
+      <MdCameraAlt
         onClick={() => setIsOpen(true)}
         className="text-2xl text-mediumGray focus:border-rose-300 focus:ring-1 mr-4 cursor-pointer"
       />
