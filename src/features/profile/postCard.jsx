@@ -3,7 +3,7 @@ import { useAuthentication } from "../auth/authenticationSlice";
 import { deletePostButtonClicked, likeButtonClicked } from "./profileSlice";
 import { userLikesClicked } from "../posts/postSlice";
 import { Link } from "react-router-dom";
-import { MdFavorite } from "react-icons/md";
+import { MdClose, MdDelete, MdFavorite } from "react-icons/md";
 import Linkify from "react-linkify/dist/components/Linkify";
 
 export const PostCard = ({ post }) => {
@@ -34,20 +34,29 @@ export const PostCard = ({ post }) => {
 
   return (
     <>
-      <article className="border-1 shadow-lg rounded-2xl">
+      <article className="border-2 shadow-lg rounded-2xl border-gray-100 my-6">
         <div className="flex flex-col">
-          <div className="flex flex-row gap-2 p-4 items-center">
-            <img src={post?.userId?.avatar} alt={post?.userId?.userName}></img>
-            <Link to={`/profile/${post?.userId?.userName}`}>
-              <h1 className="font-medium text-lg">{post?.userId?.userName}</h1>
-            </Link>
+          <div className="flex flex-row p-4 items-center justify-between">
+            <div className="flex gap-3 mt-2">
+              <img
+                src={post?.userId?.avatar}
+                alt={post?.userId?.userName}
+                className="border-2 border-gray-200 w-10 h-10 rounded-full"
+              ></img>
+              <Link to={`/profile/${post?.userId?.userName}`}>
+                <h1 className="font-medium text-lg">
+                  {post?.userId?.userName}
+                </h1>
+              </Link>
+            </div>
+
             {showDeleteButton && (
               <button
                 onClick={() =>
                   dispatch(deletePostButtonClicked({ postId: post._id }))
                 }
               >
-                x
+                <MdDelete className="text-2xl text-mediumGray focus:border-rose-300 focus:ring-1 mr-4 cursor-pointer" />
               </button>
             )}
           </div>
@@ -69,9 +78,11 @@ export const PostCard = ({ post }) => {
               </button>
               {getLikesText(post?.totalLikes)}
             </div>
-            <div className="flex gap-2">
+            <div className="flex gap-2 my-2 items-center">
               <Link to={`/profile/${post?.userId?.userName}`}>
-                <h2 className="font-semibold">{post?.userId?.userName} </h2>
+                <h2 className="font-semibold text-lg">
+                  {post?.userId?.userName}{" "}
+                </h2>
               </Link>
               <p>{post?.caption}</p>
             </div>
