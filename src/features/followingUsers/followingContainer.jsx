@@ -53,7 +53,7 @@ export const FollowingContainer = ({ userName }) => {
 
   return (
     <>
-      <div onClick={() => setIsOpen(true)}>following</div>
+      <div onClick={() => setIsOpen(true)} className="cursor-pointer">following</div>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
         <div>
           {followingDetails.length === 0 ? (
