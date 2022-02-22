@@ -46,6 +46,7 @@ export const Profile = () => {
       </>
     ) : (
       <button
+        className="border-2 border-gray-300 rounded-md px-2 text-sm"
         onClick={() =>
           dispatch(
             followButtonClicked({

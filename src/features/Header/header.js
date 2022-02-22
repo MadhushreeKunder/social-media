@@ -6,6 +6,7 @@ import {
   MdOutlineAddCircle,
 } from "react-icons/md";
 import { useAuthentication } from "../auth/authenticationSlice";
+import { Notification } from "./notification";
 
 export function Header() {
   const {
@@ -37,10 +38,12 @@ export function Header() {
               </li> */}
 
               <li className="flex items-center">
-                <NavLink to="/" className="ml-6 text-mediumGray">
+                {/* <NavLink to="/" className="ml-6 text-mediumGray">
                   <MdNotifications />
-                </NavLink>
+                </NavLink> */}
+                <Notification/>
               </li>
+
 
               <li className="flex items-center">
                 <NavLink
