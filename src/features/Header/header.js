@@ -9,8 +9,8 @@ import { useAuthentication } from "../auth/authenticationSlice";
 
 export function Header() {
   const {
-		authentication: { userName, avatar },
-	} = useAuthentication();
+    authentication: { userName, avatar },
+  } = useAuthentication();
   return (
     <>
       <header className="fixed text-center top-0 left-0 w-full z-10 items-center shadow-md bg-white">
@@ -18,7 +18,7 @@ export function Header() {
           <a href="/">
             <img
               src="Images/logo2.png"
-              alt="Quiz-Up"
+              alt="Coral-gram"
               className="w-12 h-12"
             ></img>
           </a>
@@ -30,8 +30,6 @@ export function Header() {
                 </NavLink>
               </li>
 
-             
-
               {/* <li className="flex items-center">
                 <NavLink to="/signup" className="ml-6 text-mediumGray">
                   <MdOutlineAddCircle />
@@ -39,16 +37,23 @@ export function Header() {
               </li> */}
 
               <li className="flex items-center">
-                <NavLink to="/logout" className="ml-6 text-mediumGray">
+                <NavLink to="/" className="ml-6 text-mediumGray">
                   <MdNotifications />
                 </NavLink>
               </li>
 
               <li className="flex items-center">
-                <NavLink to={`/profile/${userName}`} className="ml-6 text-mediumGray">
+                <NavLink
+                  to={`/profile/${userName}`}
+                  className="ml-6 text-mediumGray"
+                >
                   <MdAccountCircle />
                 </NavLink>
               </li>
+
+              <NavLink to="/signup"> Sign up</NavLink>
+
+              <NavLink to="/login">login</NavLink>
             </ul>
           </nav>
         </div>
