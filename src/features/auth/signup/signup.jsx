@@ -90,10 +90,10 @@ export const SignUp = () => {
       <div className="py-12 px-16 w-max flex flex-col items-center m-auto shadow-lg rounded-lg ">
         <h1 className=" text-2xl font-semibold text-secondaryDark">SignUp</h1>{" "}
         {signUpStatus === "success" ? (
-          <div>
-            <h1>Please login</h1>
+          <div className="mt-4 text-center">
+            <h1>Signup successful, please login to access account</h1>
             <Link to="/login">
-              <button>Login</button>
+              <button className="px-3 py-2 bg-primaryCoral text-white rounded-md mt-4 font-semibold">LOGIN</button>
             </Link>
           </div>
         ) : (

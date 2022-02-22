@@ -39,7 +39,10 @@ export const Profile = () => {
     return viewerUserName === userName ? (
       <>
         <UpdateProfileForm />
-        <button onClick={() => dispatch(logoutUser())}> <MdLogout/> </button>
+        <button onClick={() => dispatch(logoutUser())}>
+          {" "}
+          <MdLogout />{" "}
+        </button>
       </>
     ) : (
       <button
@@ -85,7 +88,7 @@ export const Profile = () => {
 
                 <p className="flex gap-1">
                   <strong>{profileDetails.count.following}</strong>
-                  <FollowingContainer userName={userName}  />
+                  <FollowingContainer userName={userName} />
                 </p>
               </div>
               <div className="flex flex-col">
@@ -102,10 +105,11 @@ export const Profile = () => {
               </a>
             </div>
           </div>
-
-          {postsDetails.map((post) => (
-            <PostCard key={post._id} post={post} />
-          ))}
+          <div>
+            {postsDetails.map((post) => (
+              <PostCard key={post._id} post={post} />
+            ))}
+          </div>
         </div>
       )}
     </div>

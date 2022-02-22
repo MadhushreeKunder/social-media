@@ -176,7 +176,5 @@ const profileSlice = createSlice({
 });
 
 export default profileSlice.reducer;
-
 export const { resetProfile } = profileSlice.actions;
-
 export const useProfile = () => useSelector((state) => state.profile);
