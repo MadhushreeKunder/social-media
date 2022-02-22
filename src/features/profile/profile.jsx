@@ -58,32 +58,47 @@ export const Profile = () => {
   };
 
   return (
-    <div>
+    <div className="mt-28">
       {profileDetails && (
         <div>
-          <div className="flex">
-            <img src={profileDetails?.avatar} alt={profileDetails.userName} />
+          <div className="flex px-6 py-2 pb-4 mb-4 border-b-2 border-blue-200 gap-10  ">
+            <img
+              src={profileDetails?.avatar}
+              alt={profileDetails.userName}
+              className="border-2 border-rose-400 rounded-full w-40 h-40"
+            />
 
-            <div>
-              <div>
-                {profileDetails.userName}
+            <div className="flex flex-col gap-4">
+              <div className="flex flex-row gap-4">
+                <h1 className=" text-2xl">{profileDetails.userName}</h1>
                 {getButton()}
               </div>
-              <div>
-                {postsDetails.length} posts
-                <br />
-                {profileDetails.count.followers}
-                <FollowersContainer userName={userName} />
-                <br />
-                {profileDetails.count.following}
-                <FollowingContainer userName={userName} />
+              <div className="flex gap-4">
+                <p>
+                  <strong>{postsDetails.length}</strong> posts
+                </p>
+                <p className="flex gap-1">
+                  <strong>{profileDetails.count.followers}</strong>
+                  <FollowersContainer userName={userName} />
+                </p>
+
+                <p className="flex gap-1">
+                  <strong>{profileDetails.count.following}</strong>
+                  <FollowingContainer userName={userName} />
+                </p>
               </div>
-              <div>
-                {profileDetails.name}
-                <br />
-                {profileDetails.bio}
+              <div className="flex flex-col">
+                <p className=" font-medium text-lg"> {profileDetails.name}</p>
+                <p> {profileDetails.bio}</p>{" "}
               </div>
-              {profileDetails.link}
+              <a
+                href={profileDetails.link}
+                target="_blank"
+                rel="noreferrer"
+                className=" text-blue-800 font-medium"
+              >
+                {profileDetails.link}
+              </a>
             </div>
           </div>
 
