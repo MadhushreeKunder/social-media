@@ -28,16 +28,31 @@ export const SuggestionsSection = () => {
   return (
     <div>
       <div className="sticky">
-        People to follow
         <Link to={`/profile/${userName}`}>
-          <img src={avatar} alt="" />
-          <div>{userName}</div>
-        </Link>
-        {getFiveUnfollowedUser(users).map((user) => (
-          <div mb="0.8rem" key={user.userName}>
-            <div userDetails={user} />
+          <div className="flex gap-3">
+            <img
+              src={avatar}
+              alt={userName}
+              className="border-2 border-blue-600 w-12 h-12 rounded-full"
+            />
+
+            <div className="flex flex-col">
+              <p className="text-xl font-semibold">{userName}</p>
+              <p className="text-gray-500 font-normal">{name}</p>
+            </div>
           </div>
-        ))}
+        </Link>
+        <div className="mt-4">
+          <p className="font-semibold text-lg text-gray-600">
+            {" "}
+            People to follow
+          </p>
+          {getFiveUnfollowedUser(users).map((user) => (
+            <div mb="0.8rem" key={user.userName}>
+              <div userDetails={user} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
