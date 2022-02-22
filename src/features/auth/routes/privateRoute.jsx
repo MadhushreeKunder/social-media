@@ -1,7 +1,7 @@
 import { Navigate, Route } from "react-router";
 import { useAuthentication } from "../authenticationSlice";
 
-export const PrivateRoute = ({ path, ...props }) => {
+export const PrivateRoute = ({ children, path, ...props }) => {
   const {
     authentication: { token },
   } = useAuthentication();
@@ -11,4 +11,5 @@ export const PrivateRoute = ({ path, ...props }) => {
   ) : (
     <Navigate to="/login" replace />
   );
+  // return token ? children : <Navigate replace to="/login" />;
 };

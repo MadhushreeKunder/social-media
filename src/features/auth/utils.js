@@ -2,7 +2,7 @@ import axios from "axios";
 import { logoutUser } from "./authenticationSlice";
 
 export const setupAuthHeaderForServiceCalls = (token) => {
-  console.log("token", token);
+  // console.log("token", token);
   if (token) {
     return (axios.defaults.headers.common["Authorization"] = token);
   }

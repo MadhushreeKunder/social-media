@@ -6,4 +6,5 @@ export const PublicRoute = ({ path, ...props }) => {
     authentication: { token },
   } = useAuthentication();
   return token ? <Navigate replace to="/" /> : <Route path={path} {...props} />;
+  // return token ? <Navigate replace to="/login" /> : children;
 };

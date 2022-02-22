@@ -67,6 +67,41 @@ function App() {
 
           <PublicRoute path="/login" element={<Login />} />
           <PublicRoute path="/signup" element={<SignUp />} />
+
+          {/* <Route
+            path="/"
+            element={
+              <PrivateRoute>
+                <Posts />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/profile/:userName"
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
+
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
+
+          <Route
+            path="/signup"
+            element={
+              <PublicRoute>
+                <SignUp />
+              </PublicRoute>
+            }
+          /> */}
         </Routes>
       </div>
     </div>

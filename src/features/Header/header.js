@@ -10,10 +10,10 @@ import { Notification } from "./notification";
 
 export function Header() {
   const {
-    authentication: { userName, avatar },
+    authentication: { userName, avatar, token },
   } = useAuthentication();
   return (
-    <>
+    token && (
       <header className="fixed text-center top-0 left-0 w-full z-10 items-center shadow-md bg-white">
         <div className="w-11/12 max-w-screen-lg my-0 mx-auto p-4 text-center relative flex justify-between items-center">
           <a href="/">
@@ -31,19 +31,9 @@ export function Header() {
                 </NavLink>
               </li>
 
-              {/* <li className="flex items-center">
-                <NavLink to="/signup" className="ml-6 text-mediumGray">
-                  <MdOutlineAddCircle />
-                </NavLink>
-              </li> */}
-
               <li className="flex items-center">
-                {/* <NavLink to="/" className="ml-6 text-mediumGray">
-                  <MdNotifications />
-                </NavLink> */}
-                <Notification/>
+                <Notification />
               </li>
-
 
               <li className="flex items-center">
                 <NavLink
@@ -61,6 +51,6 @@ export function Header() {
           </nav>
         </div>
       </header>
-    </>
+    )
   );
 }
