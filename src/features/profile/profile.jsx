@@ -13,6 +13,7 @@ import { FollowersContainer } from "../followersUsers/followersContainer";
 import { FollowingContainer } from "../followingUsers/followingContainer";
 import { PostCard } from "./postCard";
 import { UpdateProfileForm } from "./updateProfileForm";
+import { MdLogout } from "react-icons/md";
 
 export const Profile = () => {
   const { userName } = useParams();
@@ -38,7 +39,7 @@ export const Profile = () => {
     return viewerUserName === userName ? (
       <>
         <UpdateProfileForm />
-        <button onClick={() => dispatch(logoutUser())}>Log out</button>
+        <button onClick={() => dispatch(logoutUser())}> <MdLogout/> </button>
       </>
     ) : (
       <button
@@ -61,11 +62,11 @@ export const Profile = () => {
     <div className="mt-28">
       {profileDetails && (
         <div>
-          <div className="flex px-6 py-2 pb-4 mb-4 border-b-2 border-blue-200 gap-10  ">
+          <div className="flex px-12 py-2 pb-4 mb-4 border-b-2 border-gray-200 gap-10  ">
             <img
               src={profileDetails?.avatar}
               alt={profileDetails.userName}
-              className="border-2 border-rose-400 rounded-full w-40 h-40"
+              className="border-2 border-gray-200 rounded-full w-40 h-40"
             />
 
             <div className="flex flex-col gap-4">
@@ -84,7 +85,7 @@ export const Profile = () => {
 
                 <p className="flex gap-1">
                   <strong>{profileDetails.count.following}</strong>
-                  <FollowingContainer userName={userName} />
+                  <FollowingContainer userName={userName}  />
                 </p>
               </div>
               <div className="flex flex-col">
