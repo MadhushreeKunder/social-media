@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useAuthentication } from "../auth/authenticationSlice";
 import {
@@ -8,6 +8,7 @@ import {
   followButtonClickedInFollowingList,
 } from "./followingUsersSlice";
 import { Link } from "react-router-dom";
+import { Modal } from "../posts/Modal";
 
 export const FollowingContainer = ({ userName }) => {
   const {
@@ -48,28 +49,32 @@ export const FollowingContainer = ({ userName }) => {
     );
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
-      <div>Following</div>
-      <div>
-        {followingDetails.length === 0 ? (
-          <p>No one following yet</p>
-        ) : (
-          followingDetails.map(({ userName, followedByViewer, avatar }) => {
-            return (
-              <div>
-                <Link to={`/profile/${userName}`}>
-                  <div className="flex items-center">
-                    <img src={avatar} alt="" />
-                    <p>{userName}</p>
-                  </div>
-                </Link>
-                {getFollowButton(followedByViewer, userName, viewerName)}
-              </div>
-            );
-          })
-        )}
-      </div>
+      <div onClick={() => setIsOpen(true)}>following</div>
+      <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+        <div>
+          {followingDetails.length === 0 ? (
+            <p>No one following yet</p>
+          ) : (
+            followingDetails.map(({ userName, followedByViewer, avatar }) => {
+              return (
+                <div>
+                  <Link to={`/profile/${userName}`}>
+                    <div className="flex items-center">
+                      <img src={avatar} alt="" />
+                      <p>{userName}</p>
+                    </div>
+                  </Link>
+                  {getFollowButton(followedByViewer, userName, viewerName)}
+                </div>
+              );
+            })
+          )}
+        </div>
+      </Modal>
     </>
   );
 };

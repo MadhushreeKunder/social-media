@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useAuthentication } from "../auth/authenticationSlice";
+import { Modal } from "../posts/Modal";
 import {
   loadFollowers,
   resetFollowers,
@@ -57,29 +58,33 @@ export const FollowersContainer = ({ userName }) => {
     );
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <>
-      <div>followers</div>
+      <div onClick={() => setIsOpen(true)}>followers</div>
 
-      <div>
-        {followersDetails.length === 0 ? (
-          <p>No followers yet</p>
-        ) : (
-          followersDetails.map(({ userName, followedByViewer, avatar }) => {
-            return (
-              <div>
-                <Link to={`/profile/${userName}`}>
-                  <div className="flex items-center">
-                    <img src={avatar} alt="" />
-                    <p>{userName}</p>
-                  </div>
-                </Link>
-                {getFollowButton(followedByViewer, userName, viewerName)}
-              </div>
-            );
-          })
-        )}
-      </div>
+      <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+        <div>
+          {followersDetails.length === 0 ? (
+            <p>No followers yet</p>
+          ) : (
+            followersDetails.map(({ userName, followedByViewer, avatar }) => {
+              return (
+                <div>
+                  <Link to={`/profile/${userName}`}>
+                    <div className="flex items-center">
+                      <img src={avatar} alt="" />
+                      <p>{userName}</p>
+                    </div>
+                  </Link>
+                  {getFollowButton(followedByViewer, userName, viewerName)}
+                </div>
+              );
+            })
+          )}
+        </div>
+      </Modal>
     </>
   );
 };
