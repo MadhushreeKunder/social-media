@@ -98,12 +98,12 @@ export const SignUp = () => {
           </div>
         ) : (
           <form
-            //   onSubmit={(e) => e.preventDefault()}
+            onSubmit={(e) => e.preventDefault()}
             className="flex flex-col items-center justify-center align-middle my-4 mx-auto"
           >
             <div
               className="flex flex-col w-60 m-4 justify-start"
-              isInvalid={!!formState.emailError}
+              // isInvalid={!!formState.emailError}
             >
               <label className="mb-2 font-medium text-slate-900 self-start">
                 <MdEmail className="inline" /> Email
@@ -129,7 +129,7 @@ export const SignUp = () => {
 
             <div
               className="flex flex-col w-60 m-4 justify-start"
-              isInvalid={!!formState.usernameError}
+              // isInvalid={!!formState.usernameError}
             >
               <label className="mb-2 font-medium text-slate-900 self-start">
                 <MdPerson className="inline" /> Name
@@ -158,7 +158,7 @@ export const SignUp = () => {
 
             <div
               className="flex flex-col w-60 m-4 justify-start"
-              isInvalid={!!formState.userNameError}
+              // isInvalid={!!formState.userNameError}
             >
               <label className="mb-2 font-medium text-slate-900 self-start">
                 <MdPerson className="inline" /> Username
@@ -186,8 +186,8 @@ export const SignUp = () => {
             </div>
 
             <div
-              className="flex flex-col w-60 m-4 justify-start"
-              isInvalid={!!formState.passwordError}
+              className="flex flex-col w-60 m-4 justify-start relative"
+              // isInvalid={!!formState.passwordError}
             >
               <label className="mb-2 font-medium text-slate-900 self-start">
                 <MdLock className="inline" /> Password
