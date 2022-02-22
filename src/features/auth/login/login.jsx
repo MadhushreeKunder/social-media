@@ -135,13 +135,13 @@ export const Login = () => {
             onClick={() => {
               formDispatch({
                 type: "SET_EMAIL",
-                payload: "trial@trial.com",
+                payload: "test@test.com",
               });
               formDispatch({
                 type: "SET_PASSWORD",
-                payload: "Trial1234",
+                payload: "Test#1234",
               });
-              loginUser({ email: "trial@trial.com", password: "Trial1234" });
+              loginUser({ email: "test@test.com", password: "Test#1234" });
             }}
           >
             Login with Test Credentials
