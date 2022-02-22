@@ -53,7 +53,9 @@ export const FollowingContainer = ({ userName }) => {
 
   return (
     <>
-      <div onClick={() => setIsOpen(true)} className="cursor-pointer">following</div>
+      <div onClick={() => setIsOpen(true)} className="cursor-pointer">
+        following
+      </div>
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
         <div>
           {followingDetails.length === 0 ? (
@@ -61,14 +63,20 @@ export const FollowingContainer = ({ userName }) => {
           ) : (
             followingDetails.map(({ userName, followedByViewer, avatar }) => {
               return (
-                <div>
+                <div key={userName} className="flex gap-2 my-2 justify-between">
                   <Link to={`/profile/${userName}`}>
                     <div className="flex items-center">
-                      <img src={avatar} alt="" />
+                      <img
+                        src={avatar}
+                        alt={userName}
+                        className="border-2 border-gray-200 w-10 h-10 rounded-full mr-2"
+                      />
                       <p>{userName}</p>
                     </div>
                   </Link>
-                  {getFollowButton(followedByViewer, userName, viewerName)}
+                  <button className="border-2 border-gray-300 px-2 py-1 rounded-md ">
+                    {getFollowButton(followedByViewer, userName, viewerName)}
+                  </button>
                 </div>
               );
             })
