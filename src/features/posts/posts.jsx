@@ -1,4 +1,4 @@
-import { PostCard } from "../profile/postCard";
+import { PostCard } from "./postCard";
 import { SuggestionsSection } from "../users/suggestions";
 import { ComposePostForm } from "./composePostForm";
 import { usePostSelector } from "./postSlice";

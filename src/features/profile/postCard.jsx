@@ -4,7 +4,7 @@ import { deletePostButtonClicked, likeButtonClicked } from "./profileSlice";
 import { userLikesClicked } from "../posts/postSlice";
 import { Link } from "react-router-dom";
 import { MdClose, MdDelete, MdFavorite } from "react-icons/md";
-import Linkify from "react-linkify/dist/components/Linkify";
+import Linkify from "react-linkify";
 
 export const PostCard = ({ post }) => {
   const dispatch = useDispatch();

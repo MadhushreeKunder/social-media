@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { MdFavorite } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { likeButtonClicked } from "../profile/profileSlice";
+import Linkify from "react-linkify";
 
 export const PostCard = ({ post }) => {
   const getLikesText = (totalLikes) => {
@@ -17,16 +18,24 @@ export const PostCard = ({ post }) => {
   const dispatch = useDispatch();
 
   return (
-    <article className="border-1 shadow-lg rounded-2xl">
+    <article className="border-2 shadow-lg rounded-2xl border-gray-100 my-6">
       <div className="flex flex-col">
         <div className="flex flex-row gap-2 p-4 items-center">
-          <img src={post?.userId?.avatar} alt={post?.userId?.userName}></img>
+          <img
+            src={post?.userId?.avatar}
+            alt={post?.userId?.userName}
+            className="border-2 border-gray-200 w-10 h-10 rounded-full"
+            />
+
           <Link to={`/profile/${post?.userId?.userName}`}>
             <h1 className="font-medium text-lg">{post?.userId?.userName}</h1>
           </Link>
         </div>
         <div className="border-y-2">
-          <p className="m-4 text-2xl">{post?.content}</p>
+          <p className="m-4 text-2xl">
+            {" "}
+            <Linkify>{post?.content}</Linkify>
+          </p>
           {post?.media && <img src={post?.media} alt={post?.content} />}
         </div>
         <div className="p-4">
