@@ -15,6 +15,8 @@ export const Notification = () => {
         <MdNotifications className="ml-6 text-mediumGray" />
       </div>
 
+      
+
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
         <div className="overflow-scroll h-full max-h-96">
           {notifications.length === 0 ? (
