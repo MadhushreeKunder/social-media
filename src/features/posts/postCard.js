@@ -13,7 +13,8 @@ export const PostCard = ({ post }) => {
     );
   };
 
-  const getColorForIconButton = (isLiked) => (isLiked ? "pink" : "gray");
+  const getColorForIconButton = (isLiked) =>
+    isLiked ? "text-xl text-primaryCoral" : "text-xl text-darkGray";
 
   const dispatch = useDispatch();
 
@@ -25,7 +26,7 @@ export const PostCard = ({ post }) => {
             src={post?.userId?.avatar}
             alt={post?.userId?.userName}
             className="border-2 border-gray-200 w-10 h-10 rounded-full"
-            />
+          />
 
           <Link to={`/profile/${post?.userId?.userName}`}>
             <h1 className="font-medium text-lg">{post?.userId?.userName}</h1>
@@ -36,15 +37,18 @@ export const PostCard = ({ post }) => {
             {" "}
             <Linkify>{post?.content}</Linkify>
           </p>
+          {console.log(post?.media)}
           {post?.media && <img src={post?.media} alt={post?.content} />}
         </div>
         <div className="p-4">
           <div className="flex items-center gap-1 font-medium">
             <button
               onClick={() => dispatch(likeButtonClicked({ postId: post._id }))}
-              color={getColorForIconButton(post?.likedByViewer)}
+              // color={getColorForIconButton(post?.likedByViewer)}
             >
-              <MdFavorite className="text-xl text-darkGray" />
+              <MdFavorite
+                className={getColorForIconButton(post?.likedByViewer)}
+              />
             </button>
             {getLikesText(post?.totalLikes)}
           </div>
