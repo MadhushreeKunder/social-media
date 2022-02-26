@@ -7,7 +7,7 @@ export function Modal({ open, children, onClose }) {
       <div className="fixed top-0 left-0 bottom-0 right-0 bg-black opacity-70 z-50"></div>
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white z-50 p-4">
         <button onClick={onClose}>
-          <MdClose />
+          <MdClose className="fixed top-3 left-3 text-2xl" />
         </button>
         {children}
       </div>
