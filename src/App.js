@@ -24,6 +24,7 @@ import {
 } from "./features/posts/postSlice";
 import { useLocation } from "react-router";
 import { loadUsers } from "./features/users/usersSlice";
+import { Home } from "./features";
 
 function App() {
   const {
@@ -67,6 +68,7 @@ function App() {
 
           <PublicRoute path="/login" element={<Login />} />
           <PublicRoute path="/signup" element={<SignUp />} />
+          <PublicRoute path="/home" element={<Home />} />
 
           {/* <Route
             path="/"
