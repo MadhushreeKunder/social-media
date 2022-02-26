@@ -16,29 +16,33 @@ export const Notification = () => {
       </div>
 
       <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-        <div>
+        <div className="overflow-scroll h-full max-h-96">
           {notifications.length === 0 ? (
             <p>No notifications.</p>
           ) : (
             notifications.map((activity) => (
-              <div>
+              <div className="m-4 capitalize text-lg ">
                 <Link to={`/profile/${activity.activityUserId.userName}`}>
                   <div className="flex">
                     <img
                       src={activity.activityUserId.avatar}
                       alt={activity.activityUserId.userName}
+                      className="w-12 h-12 rounded-full mr-2 self-center"
                     />
-                    <div>
+                    <div className="flex flex-col text-left">
                       <p>{activity.activityUserId.userName}</p>
+
+                      <p className="font-normal text-base">
+                        {activity.activityTitle}
+                        <span>
+                          {activity?.likedPost?.caption &&
+                            `: ${activity?.likedPost?.caption}`}
+                        </span>
+                      </p>
+                      <p className=" font-normal text-base text-gray-400">
+                        {activity.time}
+                      </p>
                     </div>
-                    <p>
-                      {activity.activityTitle}
-                      <span>
-                        {activity?.likedPost?.caption &&
-                          `: ${activity?.likedPost?.caption}`}
-                      </span>
-                    </p>
-                    <p>{activity.time}</p>
                   </div>
                 </Link>
               </div>
