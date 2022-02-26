@@ -34,13 +34,11 @@ export function Header() {
               </NavLink>
             </li>
 
-            <li className="flex items-center">
-              <Notification />
-            </li>
+            <li className="flex items-center">{token && <Notification />}</li>
 
             <li className="flex items-center">
               <NavLink
-                to={token ? `/profile/${userName}`: "/login"}
+                to={token ? `/profile/${userName}` : "/login"}
                 className="ml-6 text-mediumGray"
               >
                 <MdAccountCircle />
