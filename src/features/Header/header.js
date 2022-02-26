@@ -44,10 +44,10 @@ export function Header() {
                 <MdAccountCircle />
               </NavLink>
             </li>
-
+{/* 
             <NavLink to="/signup"> Sign up</NavLink>
 
-            <NavLink to="/login">login</NavLink>
+            <NavLink to="/login">login</NavLink> */}
           </ul>
         </nav>
       </div>
