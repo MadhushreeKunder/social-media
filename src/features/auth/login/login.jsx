@@ -2,9 +2,10 @@ import { useReducer } from "react";
 import { useDispatch } from "react-redux";
 import { loginFormReducer, initialFormState } from "./login.reducer";
 import { loginButtonClicked } from "../authenticationSlice";
-import { MdPerson, MdLock, MdEmail, MdRemoveRedEye } from "react-icons/md";
+import { MdLock, MdEmail, MdRemoveRedEye } from "react-icons/md";
 import { FaEyeSlash } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 
 const checkLoginFormValidity = (formState, formDispatch) => {
   let errorFlag = true;
@@ -31,6 +32,8 @@ export const Login = () => {
     loginFormReducer,
     initialFormState
   );
+  const { state } = useLocation();
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -48,6 +51,10 @@ export const Login = () => {
           password: formState.password,
         })
       );
+
+      if (dispatchResponse.meta.requestStatus === "fulfilled") {
+        navigate(state?.from ? state.from : "/");
+      }
 
       if (dispatchResponse.meta.requestStatus === "rejected") {
         formDispatch({
@@ -68,7 +75,7 @@ export const Login = () => {
         )}
       </h3> */}
         <form
-            onSubmit={(e) => e.preventDefault()}
+          onSubmit={(e) => e.preventDefault()}
           className="flex flex-col items-center justify-center align-middle my-4 mx-auto"
         >
           <div
