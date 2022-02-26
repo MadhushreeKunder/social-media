@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { logoutUser, useAuthentication } from "../auth/authenticationSlice";
 import { followButtonClicked } from "../followersUsers/followersUsersSlice";
 import {
@@ -35,13 +35,19 @@ export const Profile = () => {
     return () => dispatch(resetProfile());
   }, [userName, dispatch]);
 
+  const navigate = useNavigate();
+
   const getButton = () => {
     return viewerUserName === userName ? (
       <>
         <UpdateProfileForm />
-        <button onClick={() => dispatch(logoutUser())}>
-          {" "}
-          <MdLogout />{" "}
+        <button
+          onClick={() => {
+            dispatch(logoutUser());
+            navigate("/home");
+          }}
+        >
+          <MdLogout />
         </button>
       </>
     ) : (
