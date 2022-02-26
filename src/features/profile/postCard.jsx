@@ -12,7 +12,8 @@ export const PostCard = ({ post }) => {
     authentication: { userName },
   } = useAuthentication();
 
-  const getColorForIconButton = (criteria) => (criteria ? "pink" : "gray");
+  const getColorForIconButton = (isLiked) =>
+  isLiked ? "text-xl text-primaryCoral" : "text-xl text-darkGray";
 
   const getLikesText = (totalLikes) => {
     return totalLikes === 0 ? (
@@ -72,9 +73,11 @@ export const PostCard = ({ post }) => {
                 onClick={() =>
                   dispatch(likeButtonClicked({ postId: post._id }))
                 }
-                color={getColorForIconButton(post?.likedByViewer)}
+                // color={getColorForIconButton(post?.likedByViewer)}
               >
-                <MdFavorite className="text-xl text-darkGray" />
+                <MdFavorite
+                  className={getColorForIconButton(post?.likedByViewer)}
+                />
               </button>
               {getLikesText(post?.totalLikes)}
             </div>
