@@ -5,6 +5,10 @@ export const PublicRoute = ({ path, ...props }) => {
   const {
     authentication: { token },
   } = useAuthentication();
-  return token ? <Navigate replace to="/" /> : <Route path={path} {...props} />;
+  return token ? (
+    <Navigate replace to="/posts" />
+  ) : (
+    <Route path={path} {...props} />
+  );
   // return token ? <Navigate replace to="/login" /> : children;
 };

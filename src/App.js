@@ -63,15 +63,16 @@ function App() {
       <Header />
       <div>
         <Routes>
-          <PrivateRoute path="/" element={<Posts />} />
+          <PublicRoute path="/" element={<Home />} />
+
+          <PrivateRoute path="/posts" element={<Posts />} />
           <PrivateRoute path="/profile/:userName" element={<Profile />} />
 
           <PublicRoute path="/login" element={<Login />} />
           <PublicRoute path="/signup" element={<SignUp />} />
-          <PublicRoute path="/home" element={<Home />} />
 
           {/* <Route
-            path="/"
+            path="/posts"
             element={
               <PrivateRoute>
                 <Posts />

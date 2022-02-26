@@ -44,7 +44,7 @@ export const Profile = () => {
         <button
           onClick={() => {
             dispatch(logoutUser());
-            navigate("/home");
+            navigate("/");
           }}
         >
           <MdLogout />

@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import { useAuthentication } from "../auth/authenticationSlice";
 
 export function Home() {
-    const {
-        authentication: { token },
-      } = useAuthentication();
+  const {
+    authentication: { token },
+  } = useAuthentication();
   return (
     <>
       <div>
@@ -15,7 +15,7 @@ export function Home() {
               Connect with the world on <br />{" "}
               <span style={{ color: "#fe656b" }}>CORAL-gram</span>
             </h1>
-            <Link to={token? "/" : "/login"}>
+            <Link to={token ? "/posts" : "/login"}>
               <button className="bg-primaryCoral text-white font-semibold tracking-wide  py-4 px-5 rounded-full text-2xl uppercase shadow-lg mt-4 hover:bg-red-500">
                 Connect now
               </button>

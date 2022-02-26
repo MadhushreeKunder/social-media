@@ -73,7 +73,7 @@ export const ComposePostForm = () => {
         setMedia(null);
         setToken("");
         if (sharedPostTitle) {
-          navigate("/");
+          navigate("/posts");
         }
       }
     }
@@ -118,7 +118,7 @@ export const ComposePostForm = () => {
       await deleteImage();
     }
     if (sharedPostTitle) {
-      navigate("/");
+      navigate("/posts");
     }
   };
 

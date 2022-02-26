@@ -53,7 +53,7 @@ export const Login = () => {
       );
 
       if (dispatchResponse.meta.requestStatus === "fulfilled") {
-        navigate(state?.from ? state.from : "/");
+        navigate(state?.from ? state.from : "/posts");
       }
 
       if (dispatchResponse.meta.requestStatus === "rejected") {
