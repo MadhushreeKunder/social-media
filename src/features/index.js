@@ -6,3 +6,4 @@ export { SignUp } from "./auth/signup/signup";
 export { setupAuthExceptionHandler } from "./auth/utils";
 export { setupAuthHeaderForServiceCalls } from "./auth/utils";
 export { Login } from "./auth/login/login";
+export { Home } from "./home/home";
