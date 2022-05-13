@@ -37,7 +37,6 @@ export const PostCard = ({ post }) => {
             {" "}
             <Linkify>{post?.content}</Linkify>
           </p>
-          {console.log(post?.media)}
           {post?.media && <img src={post?.media} alt={post?.content} />}
         </div>
         <div className="p-4">
