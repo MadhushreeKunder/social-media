@@ -59,7 +59,7 @@ export const ComposePostForm = () => {
       const newPostDetails = {
         caption: formState.caption,
         content: formState.content,
-        media: media ? media.secure_url : "",
+        media: media ? media.url : "",
       };
 
       const { meta } = await dispatch(
